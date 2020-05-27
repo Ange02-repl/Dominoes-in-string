@@ -1,0 +1,29 @@
+class Solution(object):
+
+
+	def pushDominoes(self, dominoes):
+		dominoes = list(dominoes)
+		for passes in range(len(dominoes)):
+			char = 0
+			while char < len(dominoes) - 1:
+				if dominoes[char] == 'R' and dominoes[char + 1] == '.' and char != len(dominoes)-1:
+					dominoes[char + 1] = 'R'
+					char += 1
+				if dominoes[char] == 'L' and dominoes[char - 1] == '.' and char != 0:
+					dominoes[char - 1] = 'L'
+					char += 1
+				else:
+					char += 1
+		for i in range(len(dominoes)-1):
+			if dominoes[i] == 'R' and dominoes[i + 1] == 'L' and dominoes[i-1] == 'R':
+				dominoes[i] = '.'
+		for j in range(len(dominoes)-1):
+			if dominoes[j] == 'R' and dominoes[j + 1] == 'L':
+				dominoes[j] = '.'
+				dominoes[j + 1] = '.'
+		return dominoes
+
+
+print(Solution().pushDominoes('..RLR.....L..R.LRL'))
+# ..RR.LL..RR
+
